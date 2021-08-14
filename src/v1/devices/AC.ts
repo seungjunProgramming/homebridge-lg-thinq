@@ -87,4 +87,22 @@ export default class AC extends AirConditioner {
 
     this.updateAccessoryCharacteristic(device);
   }
+
+  async setCoolPowerMode(value: CharacteristicValue) {
+    if (!this.Status.isPowerOn) {
+      return;
+    }
+
+    
+    const device: Device = this.accessory.context.device;
+
+    if(this.config.ac_cool_power_mode)
+    {
+      await this.platform.ThinQ?.thinq1DeviceControl(device.id, 'WindStrength', 1799);
+      device.data.snapshot['WindStrength'] = 1799;
+
+      await this.platform.ThinQ?.thinq1DeviceControl(device.id, 'IceValley', 1);
+      device.data.snapshot['WindStrength'] = 1;
+    }
+  }
 }
