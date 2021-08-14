@@ -102,7 +102,7 @@ export default class AC extends AirConditioner {
       device.data.snapshot['WindStrength'] = 1799;
 
       await this.platform.ThinQ?.thinq1DeviceControl(device.id, 'IceValley', 1);
-      device.data.snapshot['WindStrength'] = 1;
+      device.data.snapshot['IceValley'] = 1;
     }
   }
 }
